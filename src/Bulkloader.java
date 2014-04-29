@@ -14,7 +14,11 @@ public class Bulkloader {
 
 	protected BatchInserter graph = null;
     protected DynamicRelationshipType relationshipType;
+	
+	protected int progressStep = 1000000;
+	protected boolean showProgress = true;
 
+	
 	public Bulkloader(String directory, final Map<String, String> parameters) {
 	    
 		if (null == parameters)
@@ -36,9 +40,6 @@ public class Bulkloader {
 		for (int i = 0; i < nodeMap.length; i++) nodeMap[i] = -1;
 		
 		long numEdges = 0;
-		
-		int progressStep = 1000000;
-		boolean showProgress = true;
 		if (showProgress) System.err.print("Loading:\n  ");
 		
 		while (true) {

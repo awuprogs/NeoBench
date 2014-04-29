@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.HashSet;
 
 import org.neo4j.graphdb.Direction;
@@ -9,7 +10,7 @@ import org.neo4j.tooling.GlobalGraphOperations;
 
 public class TriangleCounting extends Benchmark {
 
-	public TriangleCounting(String directory) {
+	public TriangleCounting(String directory) throws IOException {
 		super(directory);
 	}
 

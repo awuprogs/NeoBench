@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -9,7 +11,7 @@ public class PageRank extends Benchmark {
 	
 	private int iterations = 10;
 
-	public PageRank(String directory) {
+	public PageRank(String directory) throws IOException {
 		super(directory);
 	}
 	
@@ -48,8 +50,12 @@ public class PageRank extends Benchmark {
 
 
 		// Iterations
+		
+		System.err.println("Computing PageRank:");
 
 		for (int iter = 0; iter < iterations; iter++) {
+			
+			System.err.println("  Iteration " + (iter+1) + "/" + iterations);
 
 			double auxSum = 0;
 

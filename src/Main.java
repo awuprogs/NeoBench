@@ -13,6 +13,7 @@ public class Main {
 		System.err.println("  ./neobench.sh [OPTIONS] COMMAND ARG...");
 		System.err.println();
 		System.err.println("Options:");
+		System.err.println("  -b MB       Set buffer pool size (in MB)");
 		System.err.println("  -d DIR      Set database directory");
 		System.err.println("  -h          Print this help");
 		System.err.println();
@@ -29,13 +30,20 @@ public class Main {
 		Map<String, String> parameters = null;
 		String directory = "db";
 		
-        OptionParser parser = new OptionParser( "d:h" );
+        OptionParser parser = new OptionParser( "b:d:h" );
 
         OptionSet options = parser.parse(args);
         
         if (options.has("h")) {
         	help();
         	return;
+        }
+        if (options.has("b")) {
+        	Configuration.preferredBufferPoolSizeMB = Long.parseLong(options.valueOf("b").toString());
+        	if (Configuration.preferredBufferPoolSizeMB < 1024) {
+        		System.err.println("Error: The buffer pool must be at least 1024 MB");
+        		return;
+        	}
         }
         if (options.has("d")) {
         	directory = options.valueOf("d").toString();
