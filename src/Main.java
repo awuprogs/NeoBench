@@ -17,7 +17,9 @@ public class Main {
 		System.err.println("  -h          Print this help");
 		System.err.println();
 		System.err.println("Commands:");
-		System.err.println("  load FILE   Load the given file");
+		System.err.println("  load FILE   Load the given Type1 file");
+		System.err.println("  pagerank    PageRank");
+		System.err.println("  tc          Triangle counting");
 	}
 
 	public static void main(String[] args) throws ClassNotFoundException {
@@ -29,9 +31,7 @@ public class Main {
 		
         OptionParser parser = new OptionParser( "d:h" );
 
-        //OptionSet options = parser.parse(args);
-        //OptionSet options = parser.parse("load", "/home/pmacko/Projects/multilevel-csr-test/data/s/b10-d.dat");
-        OptionSet options = parser.parse("pagerank");
+        OptionSet options = parser.parse(args);
         
         if (options.has("h")) {
         	help();

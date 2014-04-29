@@ -35,6 +35,12 @@ public class Bulkloader {
 		long[] nodeMap = new long[80 * 1000 * 1000];
 		for (int i = 0; i < nodeMap.length; i++) nodeMap[i] = -1;
 		
+		long numEdges = 0;
+		
+		int progressStep = 1000000;
+		boolean showProgress = true;
+		if (showProgress) System.err.print("Loading:\n  ");
+		
 		while (true) {
 			int r = 0;
 			
@@ -68,7 +74,17 @@ public class Bulkloader {
 			}
 			
 			graph.createRelationship(v_tail, v_head, relationshipType, null);
+			
+			numEdges++;
+			if (showProgress && (numEdges % progressStep) == 0) {
+				System.err.print(".");
+				if ((numEdges % (10 * progressStep)) == 0) {
+					System.err.print(" " + (numEdges / 1000000) + " mil. edges\n  ");
+				}
+			}
 		}
+		
+		if (showProgress) System.err.println("Done.");
 
 		din.close();
 	}
